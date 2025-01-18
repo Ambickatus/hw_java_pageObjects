@@ -45,6 +45,17 @@ class MoneyTransferTest {
 
     }
 
+    @Test
+    void shouldNotTransferMoneyFromCardWithLowMoney() {
+        String errorMesText = "Ошибка! Невозможно перевести сумму, превышающую остаток на счёте";
+        int transferedAmount = DataHelper.invalidAmountForTransfer(initialBalanceCard2);
+        var transferPage = dashBoardPage.selectCardToTransfer(selectedCardForTransfer);
+        transferPage.transferMoney(cardFromTransfer, String.valueOf(transferedAmount));
+        dashBoardPage.reloadDashboardPage();
+        assertAll(() -> transferPage.checkErrorMessage(errorMesText));
+
+    }
+
 
     @Test
     void shouldNotTransferMoneyFromInvalidCard() {
