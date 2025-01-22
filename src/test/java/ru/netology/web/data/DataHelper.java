@@ -43,6 +43,10 @@ public class DataHelper {
         return new CardInfo("5559 0000 0000 0002", "0f3f5c2a-249e-4c3d-8287-09f7a039391d");
     }
 
+    public static CardInfo getWrongCardInfo() {
+        return new CardInfo("5559 0000 0000 0003", "000000000-0000-0000-0000-00000000000");
+    }
+
     public static int validAmountForTransfer(int initialBalance)
     {
         return Math.abs(initialBalance)/20;

@@ -17,6 +17,7 @@ class MoneyTransferTest {
     DashboardPage dashBoardPage;
     DataHelper.CardInfo selectedCardForTransfer;
     DataHelper.CardInfo cardFromTransfer;
+    DataHelper.CardInfo invalidCard;
 
 
     @BeforeEach
@@ -28,6 +29,7 @@ class MoneyTransferTest {
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         selectedCardForTransfer = DataHelper.getFirstCardInfo();
         cardFromTransfer = DataHelper.getSecondCardInfo();
+        invalidCard = DataHelper.getWrongCardInfo();
         dashBoardPage = verificationPage.validVerify(verificationCode);
         initialBalanceCard1 = dashBoardPage.getCardBalance(selectedCardForTransfer);
         initialBalanceCard2 = dashBoardPage.getCardBalance(cardFromTransfer);
@@ -62,7 +64,7 @@ class MoneyTransferTest {
         String errorMesText = "Ошибка! Произошла ошибка";
         int transferedAmount = DataHelper.validAmountForTransfer(initialBalanceCard2);
         var transferPage = dashBoardPage.selectCardToTransfer(selectedCardForTransfer);
-        transferPage.transferMoneyFromInvalidCard(String.valueOf(transferedAmount));
+        transferPage.transferMoneyFromInvalidCard(invalidCard, String.valueOf(transferedAmount));
         assertAll(() -> transferPage.checkErrorMessage(errorMesText));
     }
 }

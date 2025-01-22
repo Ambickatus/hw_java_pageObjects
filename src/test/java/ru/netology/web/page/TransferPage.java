@@ -34,9 +34,9 @@ public class TransferPage {
         buttonAction.click();
     }
 
-    public void transferMoneyFromInvalidCard(String amount){
+    public void transferMoneyFromInvalidCard(DataHelper.CardInfo info, String amount){
         transferedAmount.setValue(amount);
-        transferedFrom.setValue("1234556678890");
+        transferedFrom.setValue(info.getCardNumber());
         buttonAction.click();
     }
     public void checkErrorMessage(String text) {
